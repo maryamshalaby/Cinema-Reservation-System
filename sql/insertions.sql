@@ -25,4 +25,15 @@ INSERT INTO `users`(`username`, `password`, `first_name`, `last_name`, `birth_da
 ('maryam','1','maryam','shalaby','1997-08-07','dummy@','admin'),
 ('customer','1','someone','something','1997-08-07','dumm1y@','customer');
 
+INSERT INTO `reservations`(`screen`, `seat_row`, `seat_col`) VALUES 
+(1,1,1),
+(1,1,2),
+(1,1,3),
+(1,1,4),
+(1,2,1),
+(2,3,1),
+(3,1,1),
+(4,1,1),
+(5,1,1);
+
 

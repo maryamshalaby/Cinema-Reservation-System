@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2019 at 01:34 PM
+-- Generation Time: Dec 19, 2019 at 02:14 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -75,6 +75,33 @@ INSERT INTO `movie_times` (`movie_id`, `movie_time`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reservations`
+--
+
+CREATE TABLE `reservations` (
+  `screen` int(11) NOT NULL,
+  `seat_row` int(11) NOT NULL,
+  `seat_col` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `reservations`
+--
+
+INSERT INTO `reservations` (`screen`, `seat_row`, `seat_col`) VALUES
+(1, 1, 1),
+(1, 1, 2),
+(1, 1, 3),
+(1, 1, 4),
+(1, 2, 1),
+(2, 3, 1),
+(3, 1, 1),
+(4, 1, 1),
+(5, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `screen`
 --
 
@@ -137,6 +164,12 @@ ALTER TABLE `movie_times`
   ADD PRIMARY KEY (`movie_id`,`movie_time`);
 
 --
+-- Indexes for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD PRIMARY KEY (`screen`,`seat_row`,`seat_col`);
+
+--
 -- Indexes for table `screen`
 --
 ALTER TABLE `screen`
@@ -180,6 +213,12 @@ ALTER TABLE `movies`
 --
 ALTER TABLE `movie_times`
   ADD CONSTRAINT `movie_times_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`movie_id`);
+
+--
+-- Constraints for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`screen`) REFERENCES `screen` (`screen_number`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
