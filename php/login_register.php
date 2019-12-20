@@ -1,19 +1,15 @@
 <?php
+//operations are "login" "register"
+
 $servername = "localhost";
 $DBcred = "root";
 $DBpass = "";
 $DBname ="cinema_reservation";
-
-
-
-// Create connection
 $conn = new mysqli($servername, $DBcred, $DBpass,$DBname);
-
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully <br>";
+
 
 $op= isset($_POST['op']) ? $_POST['op'] : '';
 
@@ -40,8 +36,8 @@ if($op=="login"){
     $first_name= isset($_POST['first_name']) ? $_POST['first_name'] : '';
     $last_name= isset($_POST['last_name']) ? $_POST['last_name'] : '';
     $birth_date= isset($_POST['birth_date']) ? $_POST['birth_date'] : '';
-    $email= isset($_POST['email']) ? $_POST['email'] : 'dummy@';
-    $type= isset($_POST['type']) ? $_POST['type'] : '';
+    $email= isset($_POST['email']) ? $_POST['email'] : '';
+    $type= isset($_POST['type']) ? $_POST['type'] : 'customer';
 
 
     $sql='INSERT INTO `users`(`username`, `password`, `first_name`, `last_name`, `birth_date`, `email`, `type`) VALUES ("'.$username.'", "'.$password.'", "'.$first_name.'", "'.$last_name.'", "'.$birth_date.'", "'.$email.'", "'.$type.'")';

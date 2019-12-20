@@ -31,7 +31,6 @@ USE `cinema_reservation`;
 --
 
 CREATE TABLE `movies` (
-  `movie_id` int(11) NOT NULL,
   `movie_name` varchar(250) NOT NULL,
   `genre` varchar(50) NOT NULL,
   `screen` int(11) NOT NULL,
@@ -42,12 +41,12 @@ CREATE TABLE `movies` (
 -- Dumping data for table `movies`
 --
 
-INSERT INTO `movies` (`movie_id`, `movie_name`, `genre`, `screen`, `length`) VALUES
-(6, 'The Lion King', 'Animation', 1, 180),
-(7, 'The Lion King 2', 'Animation', 2, 100),
-(8, 'The Lion King 1/2', 'Animation', 3, 100),
-(9, 'Toy Story', 'Animation', 4, 110),
-(10, 'Toy Story 2', 'Animation', 5, 60);
+INSERT INTO `movies` (`movie_name`, `genre`, `screen`, `length`) VALUES
+('The Lion King', 'Animation', 1, 180),
+('The Lion King 2', 'Animation', 2, 100),
+('The Lion King 1/2', 'Animation', 3, 100),
+('Toy Story', 'Animation', 4, 110),
+('Toy Story 2', 'Animation', 5, 60);
 
 -- --------------------------------------------------------
 
@@ -56,7 +55,7 @@ INSERT INTO `movies` (`movie_id`, `movie_name`, `genre`, `screen`, `length`) VAL
 --
 
 CREATE TABLE `movie_times` (
-  `movie_id` int(11) NOT NULL,
+  `movie_name` varchar(250) NOT NULL,
   `movie_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -64,13 +63,13 @@ CREATE TABLE `movie_times` (
 -- Dumping data for table `movie_times`
 --
 
-INSERT INTO `movie_times` (`movie_id`, `movie_time`) VALUES
-(6, '2019-12-01 05:10:10'),
-(6, '2019-12-02 05:10:10'),
-(7, '2019-12-04 06:10:10'),
-(8, '2019-12-05 07:10:10'),
-(9, '2019-12-06 05:20:10'),
-(10, '2019-12-07 08:10:10');
+INSERT INTO `movie_times` (`movie_name`, `movie_time`) VALUES
+('The Lion King', '2019-12-01 05:10:10'),
+('The Lion King', '2019-12-02 05:10:10'),
+('The Lion King 2', '2019-12-04 06:10:10'),
+('The Lion King 1/2', '2019-12-05 07:10:10'),
+('Toy Story', '2019-12-06 05:20:10'),
+('Toy Story 2', '2019-12-07 08:10:10');
 
 -- --------------------------------------------------------
 
@@ -154,14 +153,14 @@ INSERT INTO `users` (`username`, `password`, `first_name`, `last_name`, `birth_d
 -- Indexes for table `movies`
 --
 ALTER TABLE `movies`
-  ADD PRIMARY KEY (`movie_id`),
+  ADD PRIMARY KEY (`movie_name`),
   ADD KEY `screen` (`screen`);
 
 --
 -- Indexes for table `movie_times`
 --
 ALTER TABLE `movie_times`
-  ADD PRIMARY KEY (`movie_id`,`movie_time`);
+  ADD PRIMARY KEY (`movie_name`,`movie_time`);
 
 --
 -- Indexes for table `reservations`
@@ -186,17 +185,6 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `movies`
---
-ALTER TABLE `movies`
-  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `movie_times`
---
-ALTER TABLE `movie_times`
-  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -212,7 +200,7 @@ ALTER TABLE `movies`
 -- Constraints for table `movie_times`
 --
 ALTER TABLE `movie_times`
-  ADD CONSTRAINT `movie_times_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`movie_id`);
+  ADD CONSTRAINT `movie_times_ibfk_1` FOREIGN KEY (`movie_name`) REFERENCES `movies` (`movie_name`) ON DELETE CASCADE ;
 
 --
 -- Constraints for table `reservations`
