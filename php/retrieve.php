@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$op= isset($_POST['op']) ? $_POST['op'] : 'get_movies';
+$op= isset($_POST['op']) ? $_POST['op'] : 'get_res';
 
 if($op=="get_movies"){
 
@@ -57,9 +57,10 @@ if($op=="get_movies"){
 
 
 } else if($op=="get_res"){
-    $screen= isset($_POST['screen']) ? $_POST['screen'] : '1';
+    $movie_name= isset($_POST['movie_name']) ? $_POST['movie_name'] : 'The Lion King';
+    $movie_time= isset($_POST['movie_time']) ? $_POST['movie_time'] : '2019-12-01 05:10:10';
 
-    $sql='SELECT * FROM `reservations` WHERE `screen`="'.$screen.'";';
+    $sql='SELECT * FROM `reservations` WHERE `movie_name`="'.$movie_name.'" and `movie_time`="'.$movie_time.'";';
     $result = mysqli_query($conn, $sql);
     
 
