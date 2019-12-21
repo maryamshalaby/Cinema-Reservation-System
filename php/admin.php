@@ -18,7 +18,7 @@ if($op=="add_movie"){
     $movie_name= isset($_POST['movie_name']) ? $_POST['movie_name'] : 'cats';
     $genre= isset($_POST['genre']) ? $_POST['genre'] : 'musical';
     $screen= isset($_POST['screen']) ? $_POST['screen'] : '3';
-    $length= isset($_POST['length']) ? $_POST['length'] : '127';
+    $length= isset($_POST['length']) ? $_POST['length'] : '05:10:10';
     $times= json_decode( isset($_POST['times']) ? $_POST['times'] : '');
 
 

@@ -34,7 +34,7 @@ CREATE TABLE `movies` (
   `movie_name` varchar(250) NOT NULL,
   `genre` varchar(50) NOT NULL,
   `screen` int(11) NOT NULL,
-  `length` int(11) NOT NULL
+  `length` TIME NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -42,11 +42,11 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`movie_name`, `genre`, `screen`, `length`) VALUES
-('The Lion King', 'Animation', 1, 180),
-('The Lion King 2', 'Animation', 2, 100),
-('The Lion King 1/2', 'Animation', 3, 100),
-('Toy Story', 'Animation', 4, 110),
-('Toy Story 2', 'Animation', 5, 60);
+('The Lion King', 'Animation', 1, '05:10:10'),
+('The Lion King 2', 'Animation', 2, '04:10:10'),
+('The Lion King 1/2', 'Animation', 3, '01:10:10'),
+('Toy Story', 'Animation', 4, '07:10:10'),
+('Toy Story 2', 'Animation', 5, '02:10:10');
 
 -- --------------------------------------------------------
 
