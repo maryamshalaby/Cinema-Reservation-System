@@ -12,11 +12,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$op= isset($_POST['op']) ? $_POST['op'] : 'get_res';
+$op= isset($_POST['op']) ? $_POST['op'] : 'get_movies';
 
 if($op=="get_movies"){
 
-    $sql='SELECT * FROM `movies`';
+    $sql='SELECT `movie_name`, `genre`, `screen`, `length`, GROUP_CONCAT( `movie_times`.`movie_time` SEPARATOR "/") 
+    from `movies` NATURAL JOIN `movie_times`  group by `movie_name`;';
     $result = mysqli_query($conn, $sql);
     
 

@@ -23,7 +23,7 @@ if($op=="login"){
 
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
-           echo "type:" . $row["type"];
+           echo $row["type"];
         }
      } else {
         echo "Error";

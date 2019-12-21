@@ -78,7 +78,8 @@ INSERT INTO `movie_times` (`movie_name`, `movie_time`) VALUES
 --
 
 CREATE TABLE `reservations` (
-  `screen` int(11) NOT NULL,
+  `movie_name` varchar(250) NOT NULL,
+  `movie_time` datetime NOT NULL,
   `seat_row` int(11) NOT NULL,
   `seat_col` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -87,16 +88,11 @@ CREATE TABLE `reservations` (
 -- Dumping data for table `reservations`
 --
 
-INSERT INTO `reservations` (`screen`, `seat_row`, `seat_col`) VALUES
-(1, 1, 1),
-(1, 1, 2),
-(1, 1, 3),
-(1, 1, 4),
-(1, 2, 1),
-(2, 3, 1),
-(3, 1, 1),
-(4, 1, 1),
-(5, 1, 1);
+INSERT INTO `reservations` (`movie_name`,`movie_time`, `seat_row`, `seat_col`) VALUES
+('The Lion King', '2019-12-01 05:10:10',1,5),
+('The Lion King', '2019-12-02 05:10:10',3,2),
+('The Lion King 2', '2019-12-04 06:10:10',1,1),
+('The Lion King 1/2', '2019-12-05 07:10:10',2,2);
 
 -- --------------------------------------------------------
 
@@ -166,7 +162,7 @@ ALTER TABLE `movie_times`
 -- Indexes for table `reservations`
 --
 ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`screen`,`seat_row`,`seat_col`);
+  ADD PRIMARY KEY (`movie_name`,`movie_time`,`seat_row`,`seat_col`);
 
 --
 -- Indexes for table `screen`
@@ -206,7 +202,8 @@ ALTER TABLE `movie_times`
 -- Constraints for table `reservations`
 --
 ALTER TABLE `reservations`
-  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`screen`) REFERENCES `screen` (`screen_number`);
+  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`movie_name`,`movie_time`) REFERENCES `movie_times` (`movie_name`,`movie_time`) ON DELETE CASCADE ;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
