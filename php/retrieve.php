@@ -60,7 +60,7 @@ if($op=="get_movies"){
     $movie_name= isset($_POST['movie_name']) ? $_POST['movie_name'] : 'The Lion King';
     $movie_time= isset($_POST['movie_time']) ? $_POST['movie_time'] : '2019-12-01 05:10:10';
 
-    $sql='SELECT * FROM `reservations` WHERE `movie_name`="'.$movie_name.'" and `movie_time`="'.$movie_time.'";';
+    $sql='SELECT `seat_row`,`seat_col` FROM `reservations` WHERE `movie_name`="'.$movie_name.'" and `movie_time`="'.$movie_time.'";';
     $result = mysqli_query($conn, $sql);
     
 

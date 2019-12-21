@@ -15,14 +15,14 @@ if ($conn->connect_error) {
 $op= isset($_POST['op']) ? $_POST['op'] : 'add_movie';
 
 if($op=="add_movie"){
-    $movie_name= isset($_POST['movie_name']) ? $_POST['movie_name'] : 'cats3';
+    $movie_name= isset($_POST['movie_name']) ? $_POST['movie_name'] : 'cats5';
     $genre= isset($_POST['genre']) ? $_POST['genre'] : 'musical';
     $screen= isset($_POST['screen']) ? $_POST['screen'] : '3';
-    $length= isset($_POST['length']) ? $_POST['length'] : '05:10:10';
+    $length= isset($_POST['length']) ? $_POST['length'] : '5:10:10';
     $time= isset($_POST['time']) ? $_POST['time'] : '2019-12-05 07:10:10';
 
 
-    $sql='INSERT INTO `movies`( `movie_name`, `genre`, `screen`, `length`) VALUES ("'.$movie_name.'", "'.$genre.'", "'.$screen.'", "'.$length.'")';
+    $sql='INSERT INTO `movies`( `movie_name`, `genre`, `screen`, `length`) VALUES ("'.$movie_name.'", "'.$genre.'", "'.$screen.'", "'.$length.'");';
     
 
     if (mysqli_query($conn, $sql)) {
