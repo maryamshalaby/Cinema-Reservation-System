@@ -15,11 +15,11 @@ if ($conn->connect_error) {
 $op= isset($_POST['op']) ? $_POST['op'] : 'add_movie';
 
 if($op=="add_movie"){
-    $movie_name= isset($_POST['movie_name']) ? $_POST['movie_name'] : 'cats2';
+    $movie_name= isset($_POST['movie_name']) ? $_POST['movie_name'] : 'cats3';
     $genre= isset($_POST['genre']) ? $_POST['genre'] : 'musical';
     $screen= isset($_POST['screen']) ? $_POST['screen'] : '3';
     $length= isset($_POST['length']) ? $_POST['length'] : '05:10:10';
-    $times= json_decode( isset($_POST['times']) ? $_POST['times'] : '[]');
+    $time= isset($_POST['time']) ? $_POST['time'] : '2019-12-05 07:10:10';
 
 
     $sql='INSERT INTO `movies`( `movie_name`, `genre`, `screen`, `length`) VALUES ("'.$movie_name.'", "'.$genre.'", "'.$screen.'", "'.$length.'")';
@@ -27,11 +27,11 @@ if($op=="add_movie"){
 
     if (mysqli_query($conn, $sql)) {
         //add all times
-        foreach( $times as $time ){
-            $sql='INSERT INTO `movie_times`(`movie_name`, `movie_time`) VALUES ("'.$movie_name.'", "'.$time.'");';
-            if (! mysqli_query($conn, $sql)){
-                echo "Error: " . mysqli_error($conn);
-            }
+        
+        $sql='INSERT INTO `movie_times`(`movie_name`, `movie_time`) VALUES ("'.$movie_name.'", "'.$time.'");';
+        if (! mysqli_query($conn, $sql)){
+            echo "Error: " . mysqli_error($conn);
+            exit();
         }
         echo "New record created successfully";
      } else {
