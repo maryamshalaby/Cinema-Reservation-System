@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 
 $movie_name= isset($_POST['movie_name']) ? $_POST['movie_name'] : 'The Lion King';
 $movie_time= isset($_POST['movie_time']) ? $_POST['movie_time'] : '2019-12-01 05:10:10';
-$seats= json_decode( isset($_POST['seats']) ? $_POST['seats'] : '');
+$seats= json_decode( isset($_POST['seats']) ? $_POST['seats'] : []);
 
 
 foreach( $seats as $seat ){

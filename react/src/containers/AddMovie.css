@@ -1,0 +1,8 @@
+.AddMovie {
+    padding: 60px 0;
+}
+
+.AddMovie form {
+    margin: 0 auto;
+    max-width: 600px;
+}

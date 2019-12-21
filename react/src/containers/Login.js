@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
 import './Login.css';
 
@@ -19,44 +20,32 @@ export default function Login(props) {
     async function onSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
-        try {
-            // TODO : send request to php with AJAX
-            props.userHasAuthenticated(true);
-            props.history.push("/");
-        } catch (e) {
-            alert(e.message);
-            setIsLoading(false);
-        }
-        e.userHasAuthenticated(true);
-
-        /*$.ajax({
-        type: 'POST',
-        data: {
-            'username': this.state.username,
-            'password': this.state.password
-        },
-        cache: false,
-        success: function(data) {
-            // Success..
-            this.setState({
-            contactEmail: 'success',
-            contactMessage: '<h1>Kontakt skickad!</h1><p>Återkommer så fort som möjligt.</p>'
-            });
-            $('#formContact').slideUp();
-            $('#formContact').after(this.state.contactMessage);
-            console.log('success', data);
-        }.bind(this),
-        // Fail..
-        error: function(xhr, status, err) {
-            console.log(xhr, status);
-            console.log(err);
-            this.setState({
-            contactEmail: 'danger',
-            contactMessage: '<h1>Sorry det blev fel</h1><p>Försök gärna igen, eller mejla mig direkt på magdamargaretha@gmail.com</p>'
-            });
-            console.log(this.state.contactEmail + this.state.contactMessage + 'fail');
-        }.bind(this)
-        });*/
+        const http= new XMLHttpRequest();
+        const url="http://localhost/login_register.php";
+    
+        http.open("POST", url, true);
+        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        http.onreadystatechange
+                        = function(){
+                            if(this.readyState == 4 && this.status == 200) 
+                                if (this.responseText != "Error"){
+                                    props.userHasAuthenticated("true");
+                                    if (this.responseText == "admin"){
+                                        props.history.push("/admin");
+                                    }
+                                    else{
+                                        props.history.push("/movies");
+                                    }     
+                                }
+                                else {
+                                    alert("wrong credentials");
+                                    setIsLoading(false);
+                                }       
+                            };
+        var username= fields.username;
+        var pass = fields.password;
+        var op = "login"
+        http.send("op="+ op +"&username="+username + "&pass=" + pass);
     }
 
     return (
@@ -79,7 +68,7 @@ export default function Login(props) {
                     type="password"
                 />
                 </FormGroup>
-                <Button block type="submit" bsSize="large" isLoading={isLoading} disabled={FormEmpty()}>Login</Button>
+                <LoaderButton block type="submit" bsSize="large" isLoading={isLoading} disabled={FormEmpty()}>Login</LoaderButton>
             </form>
         </div>
     );
