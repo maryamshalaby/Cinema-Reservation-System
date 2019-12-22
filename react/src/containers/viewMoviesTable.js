@@ -2,8 +2,10 @@ import React from "react";
 
 
 const ViewMoviesTable = props => {
-    const {movies, onSelect} = props;
-
+    const {movies, screenings, onSelect} = props;
+    //console.log(screenings.length);
+    if (screenings.length == 0)
+        return ( <div/> )
     return (
         <table className="table">
             <thead>
@@ -22,7 +24,16 @@ const ViewMoviesTable = props => {
                     <td>{movie[1]}</td>
                     <td>{movie[2]}</td>
                     <td>{movie[3]}</td>
-                    <td onClick={() => onSelect(movie, movie[4])} style={{ cursor: "pointer" }}>{movie[4]}</td> 
+                    <td> {
+                        screenings[index].map((screening , screeningIndex) => (
+                        <div key = {screeningIndex} onClick={() => onSelect(movie, screening)} style={{ cursor: "pointer" }}>
+                            <div>
+                                {screening}
+                            </div>
+                            <hr/>
+                        </div>
+                        ))}
+                    </td>
                     <br/>
                     <br/>
                 </tr>

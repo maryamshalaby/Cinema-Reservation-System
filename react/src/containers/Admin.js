@@ -7,6 +7,7 @@ export default function Admin(props) {
 
     // instead of getMovies http request should return movies list
     const [currentMovies, setMovies] = useState([[]]);    
+    const [screenings, setScreenings] = useState([]);    
 
     const http= new XMLHttpRequest();
     const url="http://localhost/retrieve.php";
@@ -27,7 +28,12 @@ export default function Admin(props) {
       http.send("op="+ op);
 
     useEffect(() => {
-		setMovies(currentMovies);
+        if(currentMovies[0].length != 0){
+            var tempScreenings = []
+            for (var i=0; i< currentMovies.length; i++)
+                tempScreenings.push(currentMovies[i][4].split('/'));
+            setScreenings(tempScreenings)
+        }
     }, [currentMovies]);
 
     function AddMovie(){
@@ -44,6 +50,7 @@ export default function Admin(props) {
                 <br/>
                 <EditMoviesTable className = "mtable"
                     movies={currentMovies}
+                    screenings = {screenings}
                 />
             </div>
         </div>
